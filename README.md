@@ -40,6 +40,3 @@ After installation and environment setup, you can use the following commands to 
 
 ## Contributing
 Contributions are welcome! Feel free to fork the repository and submit pull requests with improvements, bug fixes, or new features.
-
-## License
-This project is licensed under the GPL License - see the LICENSE file for more details.
