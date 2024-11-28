@@ -1,10 +1,5 @@
 #!/bin/bash
 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-BLUE='\033[0;34m'
-NC='\033[0m'
-
 # Default path
 pkg_path="packaging/rpm/pkgs"
 
@@ -26,8 +21,8 @@ done
 
 echo -e "${RED}Starting to copy noarch RPM files...${NC}"
 for file in "${noarch_rpm_files[@]}"; do
-  echo -e "${GREEN}Copying $file to $PACKAGE_DIR/SRPMS${NC}"
-  cp "$file" "$PACKAGE_DIR/SRPMS/"
+  echo -e "${GREEN}Copying $file to $PACKAGE_DIR/x86_64${NC}"
+  cp "$file" "$PACKAGE_DIR/x86_64/"
 done
 
 echo -e "${RED}Starting to copy x86_64 RPM files...${NC}"
@@ -35,5 +30,11 @@ for file in "${x86_64_rpm_files[@]}"; do
   echo -e "${GREEN}Copying $file to $PACKAGE_DIR/x86_64${NC}"
   cp "$file" "$PACKAGE_DIR/x86_64/"
 done
+
+echo -e "${GREEN}Updating repository metadata for SRPMS...${NC}"
+createrepo --update "$PACKAGE_DIR/SRPMS"
+  
+echo -e "${GREEN}Updating repository metadata for x86_64...${NC}"
+createrepo --update "$PACKAGE_DIR/x86_64"
 
 echo -e "${BLUE}Copying completed.${NC}"
